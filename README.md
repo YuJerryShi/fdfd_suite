@@ -57,6 +57,7 @@ While most solvers have their unique properties, the properties below are common
 
 ## Add permittivity blocks
 To add various dielectric or metal structures, use the function 
+
 ``` fdfd.add_eps(block_type, block_loc, block_val); ```
 
 * **block_val**: value of the permittivity. 
@@ -68,9 +69,11 @@ To add various dielectric or metal structures, use the function
   
 ## Set up the permittivity distribution
 Simply call 
+
 ``` fdfd.eps_setup(); ```
 
 To visualize the permittivity distribution, run 
+
 ``` fdfd.vis_structure(); ```
 
 ## Set up the source
@@ -96,6 +99,7 @@ To add a source to a simulation, use the function
 
 ## Run the simulation
 Call the function 
+
 ``` fdfd.simulate(); ```
 
 Upon finishing, the appropriate Ex, Ey, Ez, Hx, Hy, and Hz fields are stored in the *fdfd* object
@@ -110,6 +114,7 @@ There are three functions for visualization.
 
 ## Poynting vector
 The "poynting(obj)" function can be used to calculate the Poynting vector density of the simulation domain. After a simulation is completed, you can call the following function to compute the Poynting vector of the simulation domain. 
+
 ``` [Sx, Sy] = poynting(fdfd); ``` 
 
 
