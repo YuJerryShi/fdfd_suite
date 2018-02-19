@@ -26,7 +26,7 @@ This repository contains the following folders:
 
 * **vis:** This folder contains the visualization programs used for plotting the permittivity distribution, field patterns, and making a movie out of the field patterns. 
 
-# How to run
+# How to set up a basic simulation 
 The easiest way to learn how to use this package is to take a look at the sample programs in the **example** folder. Below is a short tutorial on what you can do with the fdfd_suite. 
 
 ## Add folders to path
@@ -56,10 +56,65 @@ While most solvers have their unique properties, the properties below are common
 * **fdfd.Npml**: Number of absorbing layers at the boundaries, i.e. PMLs, [Npmlx, Npmly]
 
 ## Add permittivity blocks
+To add various dielectric or metal structures, use the function 
+``` fdfd.add_eps(block_type, block_loc, block_val); ```
+
+* **block_val**: value of the permittivity. 
+* **block_type**: choose from 'rect', 'circ', 'poly', 'custom'
+  * 'rect': Rectangular block. **block_loc** = [x_min, y_min, x_length, y_length]. 
+  * 'circ': Circular block. **block_loc** = [x_center, y_center, radius]. 
+  * 'poly': Polygonal block. **block_loc** = [vertex1; vertex2; ... vertexN]. 
+  * 'custom': Custom block. **block_loc** = @(x, y) boolean function of coordinates x, y. 
+  
+## Set up the permittivity distribution
+Simply call 
+``` fdfd.eps_setup(); ```
+
+To visualize the permittivity distribution, run 
+``` fdfd.vis_structure(); ```
+
+## Set up the source
+To add a source to a simulation, use the function 
+``` fdfd.source_setup(src_type, src_loc, src_params) ```
+
+**src_type**: choose from 'point', 'tfsf', 'modal'
+
+* src_type = 'point': Point source
+  * src_loc = [x_coord, y_coord]
+  * src_params = src_amplitude
+  
+* src_type = 'tfsf': Total field scattered field source
+  * src_loc = [x_min, y_min, x_length, y_length]; 
+  * src_params = [src_amplitude, src_angle]. Note: src_angle (in degrees) is measured from the lower left corner with respect to the x-axis. 
+
+* src_type: 'modal': Modal line source for a waveguide
+  * src_loc = [x_center, y_center]; 
+  * src_params = {orientation, mode, num_points}; 
+    - orientation = 'v' for vertical, 'h' for horizontal
+    - mode = order of the waveguide mode. e.g. mode = 0 is for either TE0 or TM0 mode
+    - num_points = number of points above and below the center of the source. 
+
+## Run the simulation
+Call the function 
+``` fdfd.simulate(); ```
+
+Upon finishing, the appropriate Ex, Ey, Ez, Hx, Hy, and Hz fields are stored in the *fdfd* object
+
+## Visualize the field patterns
+There are three functions for visualization. 
+* **fdfd.visreal(field)**: Visualize the real part of the field
+* **fdfd.visabs(field)**: Visualize the amplitude of the field
+* **fdfd.moviereal(field, Ncycle, Nfpc)**: Create a movie of with the field. 
+  * Ncycle: (Optional) number of cycles of the movie
+  * Nfpc: (Optional) number of frames per cycle
+
+## Poynting vector
+The "poynting(obj)" function can be used to calculate the Poynting vector density of the simulation domain. After a simulation is completed, you can call the following function to compute the Poynting vector of the simulation domain. 
+``` [Sx, Sy] = poynting(fdfd); ``` 
 
 
-# More documentations to come
-I will add more documentations on how to set up your own simulations from scratch soon. For now, please refer to the **examples** folder to see how the simulations are set up. 
+# Specialized simulations 
+For more specialized simulations (spatiotemporal modulation, photonic crystal band structure, etc), please refer to the **examples** folder to see how the simulations are set up. 
 
 Please let me know if you have questions! 
 
