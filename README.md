@@ -29,5 +29,8 @@ This repository contains the following folders:
 # More documentations to come
 I will add more documentations on how to set up your own simulations from scratch soon. For now, please refer to the **examples** folder to see how the simulations are set up. 
 
-Let me know if you have questions! 
+Please let me know if you have questions! 
+
+Also, if you would like to have additional functionalities for your simulations, I'd be happy to discuss with you to see what I can do. 
+
 -Jerry, 2/19/2018
