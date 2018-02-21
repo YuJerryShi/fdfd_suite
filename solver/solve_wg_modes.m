@@ -1,4 +1,4 @@
-function [Hx, Hy, Hz, Ex, Ey, Ez, beta] = solve_wg_modes(L0, wvlen, xrange, yrange, eps_r, n)
+function [Hx, Hy, Hz, Ex, Ey, Ez, beta] = solve_wg_modes(L0, wvlen, xrange, yrange, eps_r, n, beta_scale)
 %SOLVE_WG_MODE: Solves the waveguide mode given its x-y cross section
 
 %% Input Parameters
@@ -13,6 +13,11 @@ function [Hx, Hy, Hz, Ex, Ey, Ez, beta] = solve_wg_modes(L0, wvlen, xrange, yran
 % Hx, Hy, Hz, Ex, Ey, Ez: n-by-1 cells containing of H- and E-field
 %       components of each mode
 % beta: propagation constant of each mode in 1/L0
+
+%% Set the default value for beta_est
+if isempty(beta_scale)
+    beta_scale = 2; 
+end   
 
 %% Set up the domain parameters.
 eps0 = 8.854e-12 * L0;  % vacuum permittivity in farad/L0
@@ -57,11 +62,10 @@ A = omega^2 * mu0 * blkdiag(T_eps_y, T_eps_x) + ...
 
 
 %% Solve the equation. 
-alpha = 1; 
 n_diel = sqrt(max(max(real(eps_r)))); 
 beta_est = abs(2*pi*n_diel / wvlen); 
 
-[h_temp, beta_sqr] = eigs(A, n, (beta_est*2)^2 * alpha); 
+[h_temp, beta_sqr] = eigs(A, n, (beta_est*beta_scale)^2); 
 
 
 %% Rearrange all the fields back into an array
