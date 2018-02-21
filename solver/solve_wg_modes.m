@@ -1,4 +1,4 @@
-function [Hx, Hy, Hz, Ex, Ey, Ez, beta] = solve_wg_modes(L0, wvlen, xrange, yrange, eps_r, n, beta_scale)
+function [Hx, Hy, Hz, Ex, Ey, Ez, beta, A] = solve_wg_modes(L0, wvlen, xrange, yrange, eps_r, n, beta_scale)
 %SOLVE_WG_MODE: Solves the waveguide mode given its x-y cross section
 
 %% Input Parameters
