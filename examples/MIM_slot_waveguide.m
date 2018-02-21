@@ -11,7 +11,7 @@ fdfd.yrange = [-0.75 0.75]; % [ymin, ymax]
 fdfd.N = [200 200]; % Number of cells, [Nx, Ny]
 
 fdfd.n_modes = 1; % Number of modes
-fdfd.beta_scale = 2; % Scales the initial beta_est
+fdfd.beta_scale = 2.5; % Scales the initial beta_est
 
 %% Add permittivity blocks
 eps_metal = -100 - 1i*10; 
