@@ -5,12 +5,13 @@ classdef fdfd_wg_modes < fdfd_main
     properties
         beta % Propagation constants for each waveguide mode in 1/L0
         n_modes % Number of waveguide modes
+        beta_scale % The scaling of the guess on beta. Default value is 2
     end
     
     methods
         %% Run the simulation
         function obj = simulate(obj)
-            [obj.Hx, obj.Hy, obj.Hz, obj.Ex, obj.Ey, obj.Ez, obj.beta] = solve_wg_modes(obj.L0, obj.wvlen0, obj.xrange, obj.yrange, obj.eps_r, obj.n_modes); 
+            [obj.Hx, obj.Hy, obj.Hz, obj.Ex, obj.Ey, obj.Ez, obj.beta] = solve_wg_modes(obj.L0, obj.wvlen0, obj.xrange, obj.yrange, obj.eps_r, obj.n_modes, obj.beta_scale); 
         end
         
         %% Visualize the real part of the fields
