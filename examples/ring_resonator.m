@@ -19,7 +19,7 @@ r1 = 1.5; % Inner radius
 r2 = 1.8; % Outer radius
 
 wg_c = 0.81; % Waveguide center
-wg_d = 0.201; % Waveguide length
+wg_d = 0.201; % Waveguide width
 
 fdfd.add_eps('circ', [3, 3, r2], 12); 
 fdfd.add_eps('circ', [3, 3, r1], 1); 
