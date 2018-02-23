@@ -1,4 +1,5 @@
-clear all; close all; clc; 
+clear; close all; clc; 
+addpath('../class', '../flux', '../helper', '../solver', '../vis'); 
 
 %%
 fdfd = fdfd_wg_modes(); % Instantiate the solver
